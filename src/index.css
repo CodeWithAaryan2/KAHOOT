@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Burnt Orange Theme - College Event Energy */
+    --background: 40 30% 96%;
+    --foreground: 30 10% 12%;
+
+    --card: 40 25% 98%;
+    --card-foreground: 30 10% 12%;
+
+    --popover: 40 25% 98%;
+    --popover-foreground: 30 10% 12%;
+
+    /* Burnt Orange Primary */
+    --primary: 25 95% 45%;
+    --primary-foreground: 40 30% 98%;
+
+    /* Warm Secondary */
+    --secondary: 35 30% 90%;
+    --secondary-foreground: 30 10% 20%;
+
+    --muted: 35 20% 88%;
+    --muted-foreground: 30 10% 40%;
+
+    /* Accent - Dark Charcoal */
+    --accent: 30 10% 15%;
+    --accent-foreground: 40 30% 96%;
+
+    /* Success - Forest Green */
+    --success: 145 60% 35%;
+    --success-foreground: 145 30% 98%;
+
+    /* Destructive - Crimson */
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 30% 98%;
+
+    --border: 35 25% 85%;
+    --input: 35 25% 85%;
+    --ring: 25 95% 45%;
+
+    --radius: 0.25rem;
+
+    /* Quiz specific colors */
+    --quiz-option-a: 25 95% 45%;
+    --quiz-option-b: 200 75% 45%;
+    --quiz-option-c: 145 60% 35%;
+    --quiz-option-d: 280 60% 50%;
+
+    /* Sidebar */
+    --sidebar-background: 30 10% 15%;
+    --sidebar-foreground: 40 30% 96%;
+    --sidebar-primary: 25 95% 50%;
+    --sidebar-primary-foreground: 40 30% 98%;
+    --sidebar-accent: 30 15% 25%;
+    --sidebar-accent-foreground: 40 30% 96%;
+    --sidebar-border: 30 15% 25%;
+    --sidebar-ring: 25 95% 50%;
+  }
+
+  .dark {
+    --background: 30 10% 8%;
+    --foreground: 40 30% 96%;
+
+    --card: 30 10% 12%;
+    --card-foreground: 40 30% 96%;
+
+    --popover: 30 10% 12%;
+    --popover-foreground: 40 30% 96%;
+
+    --primary: 25 95% 50%;
+    --primary-foreground: 30 10% 8%;
+
+    --secondary: 30 15% 20%;
+    --secondary-foreground: 40 30% 96%;
+
+    --muted: 30 15% 18%;
+    --muted-foreground: 35 20% 60%;
+
+    --accent: 35 25% 85%;
+    --accent-foreground: 30 10% 8%;
+
+    --success: 145 60% 40%;
+    --success-foreground: 145 30% 98%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 30% 98%;
+
+    --border: 30 15% 20%;
+    --input: 30 15% 20%;
+    --ring: 25 95% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  /* Textured background pattern */
+  .bg-texture {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, hsl(var(--primary) / 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Quiz category cards */
+  .quiz-card {
+    @apply relative overflow-hidden border-4 border-accent transition-all duration-200;
+    @apply hover:-translate-y-2 hover:shadow-[8px_8px_0px_0px_hsl(var(--accent))];
+    @apply active:translate-y-0 active:shadow-none;
+  }
+
+  /* Quiz option buttons */
+  .quiz-option {
+    @apply relative border-4 transition-all duration-150 font-semibold text-lg;
+    @apply hover:-translate-x-1 hover:-translate-y-1;
+    @apply hover:shadow-[4px_4px_0px_0px_hsl(var(--accent))];
+    @apply active:translate-x-0 active:translate-y-0 active:shadow-none;
+  }
+
+  .quiz-option-a {
+    @apply bg-primary text-primary-foreground border-accent;
+  }
+
+  .quiz-option-b {
+    @apply bg-[hsl(200,75%,45%)] text-white border-accent;
+  }
+
+  .quiz-option-c {
+    @apply bg-success text-success-foreground border-accent;
+  }
+
+  .quiz-option-d {
+    @apply bg-[hsl(280,60%,50%)] text-white border-accent;
+  }
+
+  /* Correct/Wrong states */
+  .option-correct {
+    @apply bg-success border-success animate-pulse;
+  }
+
+  .option-wrong {
+    @apply bg-destructive border-destructive opacity-70;
+  }
+
+  .option-disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  /* Score display */
+  .score-display {
+    @apply inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 font-display text-2xl;
+  }
+
+  /* Admin panel styles */
+  .admin-card {
+    @apply bg-card border-2 border-border p-6 shadow-[4px_4px_0px_0px_hsl(var(--border))];
+  }
+}
+
+@layer utilities {
+  .text-stroke {
+    -webkit-text-stroke: 2px hsl(var(--accent));
+    paint-order: stroke fill;
+  }
+
+  .animate-bounce-in {
+    animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .animate-shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+  }
+
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
+
+  .animate-score-pop {
+    animation: scorePop 0.3s ease-out;
+  }
+
+  @keyframes scorePop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+}
